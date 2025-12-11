@@ -17,6 +17,9 @@ app.use(
   cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+    exposedHeaders: ["Set-Cookie"],
   })
 ); // Lets frontend(5173) get access to the server along with cookies
 app.use(express.urlencoded({ extended: true }));
