@@ -15,7 +15,7 @@ connectDB();
 //middlewares
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 ); // Lets frontend(5173) get access to the server along with cookies
