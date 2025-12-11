@@ -19,7 +19,6 @@ router.post("/", async (req, res) => {
     const user = await User.create(req.body);
     return res.json({ message: "User created successfully", user: user });
   } catch (err) {
-    // console.error("Error saving user:", err);
     return res.status(500).json({ error: "Error saving user" });
   }
 });
