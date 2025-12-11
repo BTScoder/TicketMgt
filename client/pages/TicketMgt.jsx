@@ -35,6 +35,7 @@ const TicketMgt = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Create a new ticket
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Submitting ticket:", form);

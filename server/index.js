@@ -26,6 +26,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // Allows you to parse json from the frontend
 app.use(cookieParser());
 
+app.get("/", (req, res) => {
+  res.json({ message: "Ticket Management API is running!" });
+});
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
