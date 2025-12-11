@@ -3,7 +3,8 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
+import toast from "react-hot-toast";
+import api from "../src/api";
 const Signup = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -22,21 +23,21 @@ const Signup = () => {
 
     const isValid = Object.values(form).every((val) => val.trim() !== "");
     if (!isValid) {
-      alert("Please fill in all fields");
+      toast.error("Please fill in all fields");
       return;
     }
     // Check if passwords match
     if (form.password !== form.confirmPassword) {
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
     try {
-      const res = await axios.post("http://localhost:8080/api/users", form);
-      alert("User signed up successfully!");
+      const res = await api.post("/users", form);
+      toast.success("User signed up successfully!");
       navigate("/login");
     } catch (err) {
-      alert("Error signing up user: " + err.message);
+      toast.error("Error signing up user: " + err.message);
     }
   };
   return (
