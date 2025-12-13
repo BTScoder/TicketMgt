@@ -25,17 +25,17 @@ router.post("/login", async (req, res) => {
   );
 
   // Store token in cookie
-  res.cookie("token", token, {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-    path: "/", // Add this - makes cookie available everywhere
-    domain: "localhost", // Add this explicitly
-    maxAge: 24 * 60 * 60 * 1000, // 1 day
-  });
+  // res.cookie("token", token, {
+  //   httpOnly: true,
+  //   secure: false,
+  //   sameSite: "lax",
+  //   path: "/", // Add this - makes cookie available everywhere
+  //   domain: "localhost", // Add this explicitly
+  //   maxAge: 24 * 60 * 60 * 1000, // 1 day
+  // });
 
   // console.log("Cookie set:", token);
-  res.json({ message: "Login successful", user });
+  res.json({ message: "Login successful", user, token });
 });
 
 // Get single user

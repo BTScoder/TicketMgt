@@ -23,6 +23,7 @@ const Login = () => {
       const res = await api.post("/auth/login", form);
       const user = res.data.user;
       setUser(user); // this updates later
+      localStorage.setItem("token", res.data.token);
       toast.success(res.data.message, {
         style: {
           background: "#22c55e",

@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import api from "../src/api";
+import { useUserContext } from "../context/userContext";
 import { Link } from "react-router-dom";
 import { Ticket, Clock, CircleDot, CircleCheck, Circle } from "lucide-react";
 const Dashboard = () => {
   const [tickets, setTickets] = useState([]);
-
+  const { user } = useUserContext();
   useEffect(() => {
     try {
       const fetchTickets = async () => {
@@ -26,8 +27,8 @@ const Dashboard = () => {
       <section className=" my-10 px-4 py-10 bg-gray-400/10">
         <div className="max-w-7xl mx-auto">
           <div className="space-y-4">
-            <p className="md:text-5xl text-3xl font-bold text-gray-900">
-              Welcome back, Chidinma
+            <p className="md:text-5xl text-3xl font-bold text-gray-900 capitalize">
+              Welcome back, {user.username}!
             </p>
             <p className="md:text-lg text-gray-700">
               Here is an overview of your ticket management system

@@ -1,4 +1,4 @@
-const Modal = ({ children, show, onClose }) => {
+const Modal = ({ children, show, onClose, setUpdating }) => {
   if (!show) return null;
   return (
     <>
@@ -7,7 +7,10 @@ const Modal = ({ children, show, onClose }) => {
           {/* Close button */}
           <button
             className="absolute right-4 top-4 text-2xl text-gray-500"
-            onClick={onClose}
+            onClick={() => {
+              onClose();
+              setUpdating(false);
+            }}
           >
             &times;
           </button>

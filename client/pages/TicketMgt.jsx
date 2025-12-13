@@ -35,10 +35,18 @@ const TicketMgt = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Reset form
+  const resetForm = () => {
+    setForm({
+      title: "",
+      description: "",
+      status: "open",
+      priority: "medium",
+    });
+  };
   // Create a new ticket
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("Submitting ticket:", form);
     try {
       const res = await api.post("/tickets", form);
       setTickets([...tickets, res.data.ticket]);
@@ -78,7 +86,6 @@ const TicketMgt = () => {
   // Update Ticket
   const updateTicket = async (e, ticketId) => {
     e.preventDefault();
-    // console.log(ticketId, form);
     try {
       const res = await api.put(`/tickets/${ticketId}`, form);
       const updatedTicket = res.data.ticket;
@@ -132,12 +139,19 @@ const TicketMgt = () => {
           </h2>
           <button
             className="py-3 px-6 bg-blue-600 rounded-2xl text-white font-bold"
-            onClick={() => setOpen(true)}
+            onClick={() => {
+              setOpen(true);
+              resetForm();
+            }}
           >
             <span className="text-xl me-2">+</span> Create Ticket
           </button>
         </div>
-        <Modal show={open} onClose={() => setOpen(false)}>
+        <Modal
+          show={open}
+          onClose={() => setOpen(false)}
+          setUpdating={setUpdating}
+        >
           <form className="space-y-4 mt-10">
             <div>
               <label

@@ -15,6 +15,11 @@ router.get("/", async (req, res) => {
 // Create a new user
 router.post("/", async (req, res) => {
   console.log(req.body);
+  const { username, email } = req.body;
+  const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+  if (existingUser) {
+    return res.status(400).json({ error: "Username or email already exists" });
+  }
   try {
     const user = await User.create(req.body);
     return res.json({ message: "User created successfully", user: user });

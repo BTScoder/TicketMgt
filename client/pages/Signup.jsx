@@ -31,13 +31,12 @@ const Signup = () => {
       toast.error("Passwords do not match");
       return;
     }
-
     try {
       const res = await api.post("/users", form);
       toast.success("User signed up successfully!");
       navigate("/login");
     } catch (err) {
-      toast.error("Error signing up user: " + err.message);
+      toast.error("Error signing up user: " + err.response.data.error);
     }
   };
   return (

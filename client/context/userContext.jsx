@@ -1,8 +1,10 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import api from "../src/api";
+
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
   useEffect(() => {
     try {
       const fetchUser = async () => {
@@ -14,10 +16,14 @@ export const UserProvider = ({ children }) => {
       console.log("Error fetching user in context:", err);
     }
   }, []);
-  const [user, setUser] = useState(null);
+
+  const logoutUser = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+  };
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, logoutUser }}>
       {children}
     </UserContext.Provider>
   );
