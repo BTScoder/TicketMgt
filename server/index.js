@@ -22,7 +22,7 @@ app.use(
     exposedHeaders: ["Set-Cookie"],
   })
 ); // Lets frontend(5173) get access to the server along with cookies
-app.options("*", cors());
+// app.options("*", cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // Allows you to parse json from the frontend
 app.use(cookieParser());
